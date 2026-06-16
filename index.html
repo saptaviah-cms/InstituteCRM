@@ -291,7 +291,8 @@
 
 <script>
 // ── CONFIG — your Google Apps Script URL ──────────────────────
-const API = 'https://script.google.com/macros/s/AKfycbzT2rQWsKZPsRyPaLB6ZEjPdA78fs1aXswHxPnKU7nwiES_Z6eRIxckHLfxvN0YmC8iEg/exec';
+const RAW_API = 'https://script.google.com/macros/s/AKfycbzT2rQWsKZPsRyPaLB6ZEjPdA78fs1aXswHxPnKU7nwiES_Z6eRIxckHLfxvN0YmC8iEg/exec';
+const API = 'https://corsproxy.io/?url=' + encodeURIComponent(RAW_API);
 
 let db = { students: [], attendance: [], staff: [] };
 let currentModal = '', editingId = null;
