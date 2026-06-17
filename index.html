@@ -292,7 +292,7 @@
 <script>
 // ── CONFIG — your Google Apps Script URL ──────────────────────
 const RAW_API = 'https://script.google.com/macros/s/AKfycbzT2rQWsKZPsRyPaLB6ZEjPdA78fs1aXswHxPnKU7nwiES_Z6eRIxckHLfxvN0YmC8iEg/exec';
-const API = 'https://thingproxy.freeboard.io/fetch/' + RAW_API;
+const API = 'https://corsproxy.io/?url=' + encodeURIComponent(RAW_API);
 
 let db = { students: [], attendance: [], staff: [] };
 let currentModal = '', editingId = null;
@@ -320,9 +320,9 @@ function setSyncBadge(state, msg) {
 async function loadAll() {
   setSyncBadge('loading', '⟳ Loading…');
   try {
-    const [students, attendance, staff] = await Promise.all([
-      api('getAll','Students'), api('getAll','Attendance'), api('getAll','Staff')
-    ]);
+    const students = await api('getAll','Students');
+    const attendance = await api('getAll','Attendance');
+    const staff = await api('getAll','Staff');
     db.students   = Array.isArray(students)   ? students   : [];
     db.attendance = Array.isArray(attendance) ? attendance : [];
     db.staff      = Array.isArray(staff)      ? staff      : [];
